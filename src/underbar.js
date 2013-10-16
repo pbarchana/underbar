@@ -16,6 +16,15 @@ var _ = { };
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
   _.first = function(array, n) {
+
+    if( array == undefined || array == null )
+      return array;
+    if ( n == undefined || n == null)  //if n value is unspecified return first element of array
+      return array[0];
+    if( n <= 0)   // if n==0 or n is negative return empty array
+      return [];
+    else
+      return array.slice(0 , n);  //slice the array from index 0 to n 
   };
 
   // Like first, but for the last elements. If n is undefined, return just the
