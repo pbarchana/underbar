@@ -38,10 +38,7 @@ var _ = { };
     if ( n <= 0 )   // if n==0 or n is negative return empty array
       return [];
 
-    n = array.length - n;   
-    if ( n <= 0 )       // if n is greater than array length
-      return array.slice(0);    //return complete array
-    else
+    n = Math.max(array.length - n, 0);   
       return array.slice(n);    
   };
 
@@ -69,6 +66,8 @@ var _ = { };
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
     var result_index = -1;
+    if (array == undefined || array.length <= 0)
+      return -1;
     _.each(array,function (elem, index, array){
       if ((result_index < 0) && (target == elem))  
         result_index = index;
@@ -80,9 +79,9 @@ var _ = { };
   _.filter = function(collection, iterator) {
     var result_array = [];
     _.each(collection, function(value, key, collection){
-      if (iterator(value)){
-        result_array.push(value);
-      }
+        if (iterator(value)){
+          result_array.push(value);
+        }
     });
     return result_array;
   };
@@ -98,6 +97,12 @@ var _ = { };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var result_array = [];
+    _.each(array, function(value, key, collection){
+        if (_.indexOf(result_array, value) < 0 )
+          result_array.push(value);  
+    });
+    return result_array;
   };
 
 
