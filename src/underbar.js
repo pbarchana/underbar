@@ -17,11 +17,11 @@ var _ = { };
   // return just the first element.
   _.first = function(array, n) {
 
-    if( array == undefined || array == null )
+    if ( array == undefined || array == null )
       return array;
-    if ( n == undefined || n == null)  //if n value is unspecified return first element of array
+    if ( n == undefined || n == null )  //if n value is unspecified return first element of array
       return array[0];
-    if( n <= 0)   // if n==0 or n is negative return empty array
+    if ( n <= 0 )   // if n==0 or n is negative return empty array
       return [];
     else
       return array.slice(0 , n);  //slice the array from index 0 to n 
@@ -31,23 +31,35 @@ var _ = { };
   // last element.
   _.last = function(array, n) {
 
-    if( array == undefined || array == null )
+    if ( array == undefined || array == null )
       return array;
-    if ( n == undefined || n == null)  //if n value is unspecified return first element of array
+    if ( n == undefined || n == null )  //if n value is unspecified return first element of array
       return array[ array.length - 1 ];
-    if( n <= 0)   // if n==0 or n is negative return empty array
+    if ( n <= 0 )   // if n==0 or n is negative return empty array
       return [];
 
-    n = array.length - n;
-    if( n <= 0 )
-      return array.slice(0);
+    n = array.length - n;   
+    if ( n <= 0 )       // if n is greater than array length
+      return array.slice(0);    //return complete array
     else
-      return array.slice(n);
+      return array.slice(n);    
   };
 
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
+
+    if (Array.isArray (collection)) {
+      // for array
+      for ( var i = 0 ; i < collection.length ; i++ ){
+        iterator (collection[i], i, collection);
+      }
+    } else {
+      // for object
+      for ( var key in collection ) {
+        iterator (collection[key], key, collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
