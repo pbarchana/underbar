@@ -30,6 +30,19 @@ var _ = { };
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+
+    if( array == undefined || array == null )
+      return array;
+    if ( n == undefined || n == null)  //if n value is unspecified return first element of array
+      return array[ array.length - 1 ];
+    if( n <= 0)   // if n==0 or n is negative return empty array
+      return [];
+
+    n = array.length - n;
+    if( n <= 0 )
+      return array.slice(0);
+    else
+      return array.slice(n);
   };
 
   // Call iterator(value, key, collection) for each element of collection.
