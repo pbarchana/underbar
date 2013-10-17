@@ -154,10 +154,11 @@ var _ = { };
   //   }, 0); // should be 6
   //
   _.reduce = function(collection, iterator, initialValue) {
-    if (initialValue == undefined)
+    if (initialValue == undefined){
       initialValue = 0;
+    }
     _.each(collection, function(value, key, collection){
-      initialValue = iterator(value, initialValue);
+      initialValue = iterator(initialValue, value);
     });
     return initialValue;
   };
