@@ -49,12 +49,12 @@ var _ = { };
     if (Array.isArray (collection)) {
       // for array
       for ( var i = 0 ; i < collection.length ; i++ ){
-        iterator (collection[i], i, collection);
+        iterator (collection[i], i, collection);     // value, index, collection
       }
     } else {
       // for object
       for ( var key in collection ) {
-        iterator (collection[key], key, collection);
+        iterator (collection[key], key, collection);    //value, key, collection
       }
     }
   };
@@ -154,6 +154,12 @@ var _ = { };
   //   }, 0); // should be 6
   //
   _.reduce = function(collection, iterator, initialValue) {
+    if (initialValue == undefined)
+      initialValue = 0;
+    _.each(collection, function(value, key, collection){
+      initialValue = iterator(value, initialValue);
+    });
+    return initialValue;
   };
 
   // Determine if the array or object contains a given value (using `===`).
