@@ -138,12 +138,16 @@ var _ = { };
 
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName, args) {
-    if (typeof methodName === 'function')
+    if (typeof methodName === 'function') {    // methodName = Array.prototype.sort
       return _.map(list, function (value){
-        //should call methodName on each value
-        // Array.prototype.<methodName>
-        // function.call(value)
+        return methodName.apply(value, args);
       });
+    }
+    else if (typeof methodName === 'string') { // methodName = 'sort'
+      return _.map(list, function(value){
+          return value[methodName].apply(value, args);
+      });
+    }
   };
 
   // Reduces an array or object to a single value by repetitively calling
