@@ -141,6 +141,8 @@ var _ = { };
     if (typeof methodName === 'function')
       return _.map(list, function (value){
         //should call methodName on each value
+        // Array.prototype.<methodName>
+        // function.call(value)
       });
   };
 
@@ -182,8 +184,19 @@ var _ = { };
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-    // TIP: Try re-using reduce() here.
-    _.reduce(collection, iterator, false);
+    var func = function (previousValue, value){
+      if (previousValue === true){
+        if (iterator == undefined){
+          return !!value;  
+        }
+        else {
+          return !!iterator(value);
+        }
+      }
+      return false;
+    };
+    var initialValue = true;
+    return _.reduce(collection, func, initialValue);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
