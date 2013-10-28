@@ -334,14 +334,11 @@ var _ = { };
   _.shuffle = function(array) {
     var shuffled = [];
     var n = array.length;
-    for (var i = 0 ; i < n ; i++) {
+    each(array, function(value) {
       var random = Math.floor(Math.random() * n);
-      shuffled.push(array[random]);
-    }
+      shuffled[random] = value;
+    });    
     return shuffled;
-
-
-
   };
 
 
