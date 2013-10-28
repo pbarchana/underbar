@@ -332,6 +332,16 @@ var _ = { };
 
   // Shuffle an array.
   _.shuffle = function(array) {
+    var shuffled = [];
+    var n = array.length;
+    for (var i = 0 ; i < n ; i++) {
+      var random = Math.floor(Math.random() * n);
+      shuffled.push(array[random]);
+    }
+    return shuffled;
+
+
+
   };
 
 
