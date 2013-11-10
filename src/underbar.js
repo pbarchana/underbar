@@ -433,7 +433,23 @@ var _ = { };
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
-    
+    var aList = arguments;     
+    var firstArray = aList[0];
+    var result = [];
+
+    _.each(firstArray,function (item){
+
+      var found = false;
+      _.each(aList, function(array, index){
+        if (index != 0) {
+          found = found || _.contains(array, item);
+        }        
+      });
+      if(!found) {
+        result.push(item);
+      }
+    });
+    return result;
   };
 
 
