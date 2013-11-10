@@ -435,6 +435,7 @@ describe("sortBy", function() {
     });
 
     expect(_.pluck(people, 'name')).to.eql(['moe', 'curly']);
+    //expect(people).to.eql(['moe', 'curly']);
   });
 
   it("should handle undefined values", function() {
