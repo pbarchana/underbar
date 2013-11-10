@@ -361,8 +361,7 @@ var _ = { };
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
-    var aList = arguments;
-    
+    var aList = arguments;  
     var result = [];
 
     //find the max index
@@ -409,11 +408,32 @@ var _ = { };
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+  
+    var aList = arguments; 
+    var firstArray = aList[0];
+    var result = [];
+      _.each(firstArray,function (item){
+        var found = false;
+        _.each(aList, function (array, index){
+          if(index != 0) {
+            if(_.contains(array, item)) {//check all other arrays except the first array
+              found = true;
+            }
+            else
+              found = false;
+          }
+        });
+        if (found){
+          result.push(item);
+        }
+      }); 
+      return result;
   };
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    
   };
 
 
