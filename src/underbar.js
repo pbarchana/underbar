@@ -334,7 +334,7 @@ var _ = { };
   _.shuffle = function(array) {
     var shuffled = [];
     var n = array.length;
-    each(array, function(value) {
+    _.each(array, function(value) {
       var random = Math.floor(Math.random() * n);
       shuffled[random] = value;
     });    
@@ -361,6 +361,26 @@ var _ = { };
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    var aList = arguments;
+    
+    var result = [];
+
+    //find the max index
+    var max = 0;
+    _.each(aList, function(array){
+      if (max < array.length) {
+        max = array.length;
+      }
+    });
+
+    for(var i=0; i < max; i++ ) {
+      var temp = [];
+      _.each(aList, function (array) {
+        temp.push(array[i]);
+      });
+      result.push(temp);
+    }
+    return result;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
@@ -368,6 +388,22 @@ var _ = { };
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    if(result === undefined || result === null) {
+      result = [];
+    }
+    var traverseArray = function(array) {
+      _.each(array, function(value) {
+        if(Array.isArray(value)){
+          traverseArray(value);
+        }
+        else {
+          result.push(value);
+        }
+      });
+    };
+
+    traverseArray(nestedArray);
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
